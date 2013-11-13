@@ -138,24 +138,20 @@ def make_car_list(cars, start_date, delta):
             must_retry = True
         else:
             options = weekend_options if is_weekend(cur_day) else weekday_options
-
             # Use the first vehicle class set that has available cars to use based on the options preference list
             for possible_car_set in options:
                 # Exclude any used cars, and cars from the previous manufacturer,  include the favorite
                 # Favorite will be an empty set once selected for the week
                 car_set = (((possible_car_set - used_cars) | favorite_set) - prev_manufacturer_set)
-
                 if len(car_set) != 0:
                     break
 
             try:
                 car = choice(list(car_set))
-
                 must_retry = False
                 if car.is_favorite:
                     favorite_set = set()
             except IndexError:
-                print "Must retry"
                 must_retry = True
 
 
@@ -174,7 +170,6 @@ def make_car_list(cars, start_date, delta):
 
 
         if any([must_retry, favorite_rollback_conditions]):
-            #print "Rollback, ", cur_day
             # Rollback 13 days because the current day has not yet been applied
             rollback_date = max((cur_day - timedelta(days=13), start_date))
             rollback_days = (cur_day - rollback_date).days
@@ -194,6 +189,5 @@ def make_car_list(cars, start_date, delta):
         calendar.append((cur_day, car))
         prev_manufacturer = car.manufacturer
         cur_day += timedelta(days=1)
-
 
     return calendar
