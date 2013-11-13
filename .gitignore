@@ -34,3 +34,9 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+.idea
+atlassian*.xml
+*.sqlite3
+.DS_Store
+*.iml

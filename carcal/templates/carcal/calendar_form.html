@@ -1,0 +1,22 @@
+{% extends "carcal/main.html" %}
+
+{% block content %}
+<div class="container">
+    <ul>
+        {% for calendar in calendars %}
+        <li><a href="/{{calendar.pk}}">{{calendar.name}}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="container">
+
+    <form action="/" method="POST">
+        {{form.as_p}}
+        {% csrf_token %}
+        <div>
+            <input class="btn" type="submit" value="Create calendar">
+        </div>
+    </form>
+</div>
+{% endblock %}

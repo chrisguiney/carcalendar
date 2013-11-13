@@ -1,0 +1,22 @@
+{% extends "carcal/main.html" %}
+
+{% block content %}
+    <div class="calendar">
+    {% for week in calendar.weeks %}
+        <ul>
+            {% for cardate in week %}
+                <li>
+                    <span class="date">{{cardate.date}}</span>
+                    <span class="date">
+                        {% if cardate.car.is_favorite %}
+                            <em>{{cardate.car}}</em>
+                        {% else %}
+                            {{cardate.car}}
+                        {% endif %}
+                    </span>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+    </div>
+{% endblock %}

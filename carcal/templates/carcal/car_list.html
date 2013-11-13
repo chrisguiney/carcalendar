@@ -1,0 +1,31 @@
+{% extends "carcal/main.html" %}
+
+{% block content %}
+<h1>Cars</h1>
+<form action="/make-favorite" method="POST">
+<ul>
+    {% for car in object_list %}
+        <li style="list-style-type: none">
+            {% if car.is_favorite %}
+                <input name="favorite" checked="checked" type="radio" value="{{ car.pk }}"/>
+            {% else %}
+                <input name="favorite" type="radio" value="{{ car.pk }}"/>
+            {% endif %}
+
+            <span style="padding-left: 4px">
+                {% if car.is_favorite %}
+                    <strong>{{car}}</strong>
+                {% else %}
+                    {{car}}
+                {% endif %}
+            </span></li>
+    {% empty %}
+        <li>No cars yet.</li>
+    {% endfor %}
+</ul>
+{% csrf_token %}
+<div>
+    <input class="btn" type="submit" value="Make Favorite"/>
+</div>
+</form>
+{% endblock %}
